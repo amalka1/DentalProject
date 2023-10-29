@@ -19,13 +19,11 @@ namespace Application.Controllers
 
         public IActionResult Index()
         {
-           return RedirectToAction("AllUsers","User");
+         return View();
         }
 
         public IActionResult Privacy()
         {
-         
-           var test = _users.Table().Where(a => a.Id == 1).ToList();
             return View();
         }
 

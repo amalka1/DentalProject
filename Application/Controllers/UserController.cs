@@ -12,6 +12,14 @@ namespace Application.Controllers
         {
             _users = users;
         }
+        //This is to get the register View 
+        [HttpGet]
+        public IActionResult Register()
+        {
+
+            return View();
+        }
+        //This is to Register a user.
         [HttpPost]
         public IActionResult Register(UserDTO userFromRequest)
         {
@@ -34,12 +42,16 @@ namespace Application.Controllers
 
                 }
             }
-          return RedirectToAction("AllUsers");
+            return RedirectToAction("AllUsers");
+            
         }
         [HttpGet("/allusers")]
         public IActionResult AllUsers() 
         {
-            ViewBag.users = _users.GetAll();
+            //This orders the users from latest created.
+            var user = _users.GetAll().OrderByDescending(a => a.Id);
+            //Viewbag is used to pass the user variable to the view (in this case allusers.cshtml)
+            ViewBag.users = user;
             return View();
         }
     }
